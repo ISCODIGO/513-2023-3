@@ -22,9 +22,26 @@ En este caso se sigue el estándar para la notación BNF. Se puede tomar esta re
 <italic> ::= "*" <chars> "*"
 <chars> ::= <char> | <char> <chars>
 <char> ::= <letter> | <digit> | <symbol>
-<letter> ::= 'a' | 'b' | ... | 'z' | 'A' | 'B' | ... 'Z'
+<letter> ::= 'a' | 'b' | ... | 'z' | 'A' | ... | 'Z'
 <digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 <symbol> :: ' ' | ',' | '.' | ';' | ':' |
 ```
 
-En el caso de `<letter` y `<symbol>` son todas las apariciones de letras y símbolos necesarios para definir un identificador. No los escribi todos pero se entiende la idea.
+En el caso de `<letter` y `<symbol>` son todas las apariciones de letras y símbolos necesarios para definir un identificador. No los escribi todos pero se entiende la idea. Aunque es importante mencionar que hay símbolos prohibidos como el caso del `#` ya que denota un título.
+
+### Prueba de la gramática
+Probar que el término es parte de la gramática:
+```
+# Esto es un titulo
+```
+
+Dado que empezamos por el no-terminal más básico:
+```
+<markdown> ::= <text> | <header> | <markdown>
+<markdown> ::= <header>
+<header> ::= "#" <text> "\n"
+<text> ::= <chars>
+<chars> ::= <char><chars>
+<chars> ::= 'E', 's', 't', 'o', ' ', 'e', 's', 'u', 'n', ' ', 't', 'i', 't', 'u', 'l', 'o'
+```
+
