@@ -29,6 +29,28 @@ En este caso se sigue el estándar para la notación BNF. Se puede tomar esta re
 
 En el caso de `<letter` y `<symbol>` son todas las apariciones de letras y símbolos necesarios para definir un identificador. No los escribi todos pero se entiende la idea. Aunque es importante mencionar que hay símbolos prohibidos como el caso del `#` ya que denota un título.
 
+
+Es posible utilizar otro formato el Extended BNF (EBNF):
+```
+<markdown> ::= { <text> | <header> }
+<header> ::= <h1> | <h2> | <h3>
+<h1> ::= "#" <text> "\n"
+<h2> ::= "##" <text> "\n"
+<h3> ::= "###" <text> "\n"
+<text> ::= <chars> | <link> | <bold> | <italic> | <line>
+<line> ::= <chars> { "\n" <chars> }
+<link> ::= "[" <link_text> "]" "(" <url> ")"
+<link_text> ::= <chars>
+<url> ::= <chars>
+<bold> ::= "**" <chars> "**"
+<italic> ::= "*" <chars> "*"
+<chars> ::= { <char> }
+<char> ::= <letter> | <digit> | <symbol>
+<letter> ::= [a-zA-Z]
+<digit> ::= [0-9]
+<symbol> ::= ' ' | ',' | '.' | ';' | ':' | ...
+```
+
 ### Prueba de la gramática
 Probar que el término es parte de la gramática:
 ```
@@ -42,6 +64,10 @@ Dado que empezamos por el no-terminal más básico:
 <header> ::= "#" <text> "\n"
 <text> ::= <chars>
 <chars> ::= <char><chars>
-<chars> ::= 'E', 's', 't', 'o', ' ', 'e', 's', 'u', 'n', ' ', 't', 'i', 't', 'u', 'l', 'o'
-```
+<char> ::= <letter> | <digit> | <symbol>
+<letter> ::= 'E'
 
+
+
+'E', 's', 't', 'o', ' ', 'e', 's', 'u', 'n', ' ', 't', 'i', 't', 'u', 'l', 'o'
+```
